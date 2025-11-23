@@ -1,2 +1,2 @@
-# 2T-Spawner
-An open source C# program used to spwan anime images
+# MiniGame - AUMod
+An Among Us Mod add More Game-Mode to Play
