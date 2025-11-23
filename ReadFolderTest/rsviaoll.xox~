@@ -1,0 +1,96 @@
+﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
+
+class Program
+{
+    static readonly HttpClient client = new HttpClient();
+    static readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+    static readonly string folderPath = Path.Combine(desktopPath, "LoliAPI_Images");
+
+    static async Task Main(string[] args)
+    {
+        try
+        {
+            Directory.CreateDirectory(folderPath);
+            var imageData = await DownloadImageAsync("https://www.loliapi.com/acg/pc/");
+            if (imageData != null)
+            {
+                await SaveImageWithHashAsync(imageData);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"操作失败: {ex.Message}");
+        }
+        finally
+        {
+            Console.ReadKey();
+        }
+    }
+
+    static async Task<byte[]> DownloadImageAsync(string url)
+    {
+        try
+        {
+            client.Timeout = TimeSpan.FromSeconds(10);
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"请求失败: {ex.Message}");
+            return null;
+        }
+    }
+
+    static async Task SaveImageWithHashAsync(byte[] imageData)
+    {
+        string hash;
+        using (var md5 = MD5.Create())
+        {
+            hash = BitConverter.ToString(md5.ComputeHash(imageData))
+                .Replace("-", "").ToLowerInvariant();
+        }
+
+        string extension = GetFileExtension(imageData) ?? "jpg";
+        string filename = $"{hash}.{extension}";
+        string filePath = Path.Combine(folderPath, filename);
+
+        if (!File.Exists(filePath))
+        {
+            try
+            {
+                using (var fileStream = new FileStream(
+                    filePath,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.None,
+                    4096,
+                    FileOptions.Asynchronous))
+                {
+                    await fileStream.WriteAsync(imageData, 0, imageData.Length);
+                }
+                Console.WriteLine($"图片保存成功: {filePath}");
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"文件写入失败: {ex.Message}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("图片已存在，跳过保存");
+        }
+    }
+
+    static string GetFileExtension(byte[] data)
+    {
+        if (data.Length > 1 && data[0] == 0xFF && data[1] == 0xD8) return "jpg";
+        if (data.Length > 3 && data[0] == 0x89 && data[1] == 0x50 && data[2] == 0x4E && data[3] == 0x47) return "png";
+        return null;
+    }
+}

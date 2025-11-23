@@ -1,0 +1,14 @@
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\bin\Debug\ReadFolderTest.exe.config
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\bin\Debug\ReadFolderTest.exe
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\bin\Debug\ReadFolderTest.pdb
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\obj\Debug\ImageDownloader.csproj.AssemblyReference.cache
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\obj\Debug\ImageDownloader.csproj.CoreCompileInputs.cache
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\obj\Debug\ReadFolderTest.exe
+C:\Users\25585\source\repos\ReadFolderTest\ReadFolderTest\obj\Debug\ReadFolderTest.pdb
+E:\WindowsFile\2T-Spawner\ReadFolderTest\bin\Debug\ReadFolderTest.exe.config
+E:\WindowsFile\2T-Spawner\ReadFolderTest\bin\Debug\ReadFolderTest.exe
+E:\WindowsFile\2T-Spawner\ReadFolderTest\bin\Debug\ReadFolderTest.pdb
+E:\WindowsFile\2T-Spawner\ReadFolderTest\obj\Debug\ImageDownloader.csproj.AssemblyReference.cache
+E:\WindowsFile\2T-Spawner\ReadFolderTest\obj\Debug\ImageDownloader.csproj.CoreCompileInputs.cache
+E:\WindowsFile\2T-Spawner\ReadFolderTest\obj\Debug\ReadFolderTest.exe
+E:\WindowsFile\2T-Spawner\ReadFolderTest\obj\Debug\ReadFolderTest.pdb
